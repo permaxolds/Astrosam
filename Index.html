@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDF Kundli Generator</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+    h1 {
+      color: #ffcc00;
+    }
+    form {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+    }
+    label, input {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    input {
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px;
+      background-color: #ffcc00;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e6b800;
+    }
+  </style>
+</head>
+<body>
+  <h1>PDF Kundli Generator</h1>
+  <form id="kundliForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" required />
+    
+    <label for="dob">Date of Birth (YYYY-MM-DD):</label>
+    <input type="date" id="dob" required />
+
+    <label for="tob">Time of Birth (HH:MM):</label>
+    <input type="time" id="tob" required />
+
+    <label for="place">Place of Birth:</label>
+    <input type="text" id="place" required />
+
+    <button type="submit">Download Kundli PDF</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("kundliForm");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const dob = document.getElementById("dob").value;
+      const tob = document.getElementById("tob").value;
+      const place = document.getElementById("place").value;
+
+      const url = `https://astrokundli-backend.onrender.com/api/pdfkundli?name=${encodeURIComponent(name)}&dob=${dob}&tob=${tob}&place=${encodeURIComponent(place)}`;
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>
